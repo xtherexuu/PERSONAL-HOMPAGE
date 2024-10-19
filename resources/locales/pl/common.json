@@ -1,3 +1,7 @@
 {
-    "greeting": "Cześć"
+  "greeting": "Hello",
+  "nav_home": "STRONA GŁÓWNA",
+  "nav_order": "ZAMÓW STRONĘ",
+  "nav_recruitment": "DLA REKRUTERÓW",
+  "nav_blog": "BLOG"
 }
