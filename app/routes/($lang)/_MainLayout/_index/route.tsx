@@ -1,36 +1,30 @@
-import type { MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
-import { useTranslation } from "react-i18next";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
+import { Outlet, useLoaderData, useParams } from "@remix-run/react";
+import Header from "~/components/Header";
+import i18next from "~/localization/i18n.server";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "Bartosz Załęski" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
 
-export default function MainLayout() {
-  const { t, i18n } = useTranslation();
+export function loader({ request }: LoaderFunctionArgs) {
+  const currentLanguage = i18next.getLocale(request);
+  return currentLanguage;
+}
 
+export default function MainLayout() {
+  const currentLanguage: string = useLoaderData();
+  const params = useParams();
+  const paramsLanguage = params.lang;
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>{t("greeting")}</h1>
-      <Link
-        to="/pl"
-        onClick={() => {
-          i18n.changeLanguage("pl");
-        }}
-      >
-        PL
-      </Link>
-      <Link
-        to="/en"
-        onClick={() => {
-          i18n.changeLanguage("en");
-        }}
-      >
-        EN
-      </Link>
+    <div className="bg-lbg min-h-screen text-dbg">
+      <Header currentLanguage={paramsLanguage || currentLanguage} />
+      <div>
+        <Outlet />
+      </div>
     </div>
   );
 }
