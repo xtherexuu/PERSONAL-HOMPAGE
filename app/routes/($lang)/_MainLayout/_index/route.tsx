@@ -20,7 +20,7 @@ export default function MainLayout() {
   const params = useParams();
   const paramsLanguage = params.lang;
   return (
-    <div className="bg-lbg min-h-screen text-dbg">
+    <div className="bg-lbg min-h-[200vh] text-dbg">
       <Header currentLanguage={paramsLanguage || currentLanguage} />
       <div>
         <Outlet />
